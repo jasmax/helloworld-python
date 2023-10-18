@@ -1,7 +1,7 @@
 name: Simple Start Up
 on:
     push:
-        branches: [action]
+        branches: [main]
 
 jobs:
     build:
@@ -19,3 +19,15 @@ jobs:
           run: |
             ls
             echo Hello There!
+
+        - name: Checkout private repo remotely
+          uses: actions/checkout@v2
+          with:
+            repository: lowkh/hiddenRepo
+            #path: <folder of choice>
+            token: ${{ secrets.SECRET_TOKEN }}
+
+        - name: Show hidden files
+          run: |
+            ls -alch
+            cat README.md
